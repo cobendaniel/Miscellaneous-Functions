@@ -1,0 +1,24 @@
+def col_check(df, checkdf):
+    
+    missing_cols = []
+    existing_cols = []
+    missing_col_no = 0
+    existing_col_no = 0
+    
+    for i in checkdf:
+        if i not in list(df.columns):
+            missing_cols.append(i)
+            missing_col_no += 1
+        elif i in list(df.columns):
+            existing_cols.append(i)
+            existing_col_no += 1
+            
+    print("Number of missing columns: {}".format(missing_col_no))
+    for i in missing_cols:
+        print("Missing column name: {}".format(i))
+        
+    print("")
+        
+    print("Number of existing columns: {}".format(existing_col_no))
+    for i in existing_cols:
+        print("Existing column name: {}".format(i))
