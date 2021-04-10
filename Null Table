@@ -1,0 +1,24 @@
+def null_table(df):
+    null_table = pd.DataFrame({"Null Values" : df.isna().sum()}).reset_index().rename(columns = {"index" : "Variables"})
+    null_table["Null Percentage_(%)"] = (null_table["Null Values"] / len(df) * 100).round(2)
+    null_table["Null Values Cumulative Sum"] = null_table["Null Values"].cumsum()
+    
+    n_null_table = pd.DataFrame({"Non-Null Values" : df.notna().sum()}).reset_index().rename(columns = {"index" : "Variables"})
+    n_null_table["Non-Null Percentage_(%)"] = (n_null_table["Non-Null Values"] / len(df) * 100).round(2)
+    n_null_table["Non-Null Values Cumulative Sum"] = n_null_table["Non-Null Values"].cumsum()
+    
+    null_table["Non-Null Values"] = list(n_null_table["Non-Null Values"])
+    null_table["Non-Null Percentage_(%)"] = list(n_null_table["Non-Null Percentage_(%)"])
+    null_table["Non-Null Values Cumulative Sum"] = list(n_null_table["Non-Null Values Cumulative Sum"])
+    
+    total_null = pd.DataFrame({"Variables" : ["Total"],
+                               "Null Values" : [null_table["Null Values"].sum()],
+                               "Null Percentage_(%)" : [""],
+                               "Null Values Cumulative Sum" : [null_table["Null Values Cumulative Sum"].sum()],
+                               "Non-Null Values" : [null_table["Non-Null Values"].sum()],
+                               "Non-Null Percentage_(%)" : [""],
+                               "Non-Null Values Cumulative Sum" : [null_table["Non-Null Values Cumulative Sum"].sum()]})
+    
+    null_table = pd.concat([null_table, total_null]).reset_index().drop(columns = ["index"])
+    
+    return null_table
