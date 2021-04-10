@@ -1,0 +1,15 @@
+def proc_freq(df, var1):
+    proc_freq = pd.DataFrame({"Frequency" : df[var1].value_counts()}).reset_index().rename(columns = {"index" : "Unique Values"})
+    proc_freq["Frequency Percentage_(%)"] = proc_freq["Frequency"] / proc_freq["Frequency"].sum() * 100
+    proc_freq["Frequency Cumulative Sum"] = proc_freq["Frequency"].cumsum()
+    proc_freq["Frequency Percentage Cumulative Sum_(%)"] = proc_freq["Frequency Percentage_(%)"].cumsum()
+    
+    proc_freq_sum = pd.DataFrame({"Unique Values" : ["Total"], 
+                                 "Frequency" : [proc_freq["Frequency"].sum()],
+                                 "Frequency Percentage_(%)" : [proc_freq["Frequency Percentage_(%)"].sum()],
+                                 "Frequency Cumulative Sum" : [""],
+                                 "Frequency Percentage Cumulative Sum_(%)" : [""]})
+    
+    proc_freq = pd.concat([proc_freq, proc_freq_sum]).reset_index().drop(columns = ["index"])
+    
+    return proc_freq
