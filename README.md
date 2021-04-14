@@ -2,7 +2,7 @@
 Basic data analysis functions written by me.
 
 1. Column Check:
-- This is a very basic function that checks if a dataset contains a predefined list of columns. Requires a list of necesary columns to be defined first before the function can work properly. This version of the function is case sensitive and therefore requires the predefined list of variables and the variables in the column to be an exact match casewise. 
+- This is a very basic function that checks if a dataset contains a predefined list of columns. Requires a list of necessary columns to be defined first before the function can work properly. This version of the function is case sensitive and therefore requires the predefined list of variables and the variables in the column to be an exact match casewise. 
 
 - An update for the function that ignores cases and removes underbars to ensure better accuracy will also be implemented.
 
